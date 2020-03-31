@@ -1,33 +1,16 @@
-% This is samplepaper.tex, a sample chapter demonstrating the
-% LLNCS macro package for Springer Computer Science proceedings;
-% Version 2.20 of 2017/10/04
-%
 \documentclass[runningheads]{llncs}
 %
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage[slovak]{babel}
-% Used for displaying a sample figure. If possible, figure files should
-% be included in EPS format.
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 %
-% If you use the hyperref package, please uncomment the following line
-% to display URLs in blue roman font according to Springer's eBook style:
-% \renewcommand\UrlFont{\color{blue}\rmfamily}
-
 \begin{document}
 %
-\maketitle
 \title{Využitie genetického algoritmu na výber funkcií v oblasti behaviorálnej biometrie}
 %
-%\titlerunning{Abbreviated paper title}
-% If the paper title is too long for the running head, you can set
-% an abbreviated paper title here
 %
-\author{Jozef Varga\inst{1}}
-%
-\authorrunning{F. Author et al.}
-% First names are abbreviated in the running head.
-% If there are more than two authors, 'et al.' is used.
+\author{Jozef Varga}
 %
 \institute{Fakulta informatiky a informačných technológií STU v Bratislave, 
 Ilkovičova 2, 842 16 Bratislava 4}
@@ -45,24 +28,84 @@ Ilkovičova 2, 842 16 Bratislava 4}
     V tomto článku sme vytvorily genetický algoritmus, ktorý používame práve na výber funkcií. Nami vytvorenú
     metódu porovnávame s bežnými metódami ako sú Variance Inflation Factor (VIF) a vyber funkcií pomocou korelácií. 
     Zvolené metódy boli porovnané pomocou rôznych klasifikátorov ako sú napríklad KNN, SVM, Naive Bayes a iné. 
-    V práci sme využili verejný dataset ktorý obsahuje biometrické dáta o užívateľoch. Tieto dáta obsahujú informácie o tom v akom stave sa nachádza užívateľ, teda či sedi: leží, sedí, kráča,  kráča hore schodmy, kráča dole schodmy alebo stojí.
+    V práci sme využili verejný dataset~\cite{ref_dataset_anguita,ref_dataset} ktorý obsahuje biometrické dáta o užívateľoch. Tieto dáta obsahujú informácie o tom v akom stave sa nachádza užívateľ, teda či sedi: leží, sedí, kráča,  kráča hore schodmy, kráča dole schodmy alebo stojí.
     V tejto práci sa ukázalo, že použitie genetického algoritmu zlepšilo výsledky jednotlivých klasifikátorov.
 
 \keywords{Behavioralna biometria \and Genetický algoritmus \and Strojové učenie \and Výber funkcií / atributov.}
 \end{abstract}
 %
-%
-%
-
-
-
-
 
 %Úvod / Introduction - aká úloha sa ide riešiť, prečo je dobré ju riešiť
 \section{Úvod}
 
+V dnešnej dobe je využitie smartfónov na vzostupe. 
+Veľké množstvo ľudí tieto zariadenia využíva aj na vyhľadávanie informácií, 
+úpravu dokumentov a rôzne ďalšie funkcionality, 
+ktoré tieto zariadenia podporujú~\cite{ref_bomhold}. 
+To, že sú smartfóny veľkou súčasťou technologického sveta potvrdzuje aj 
+štatistika z roku 2018, ktorá hovorí, že až 52,2\% 
+zobrazení globálnych webových stránok prebiehalo pomocou mobilných zariadení. 
+Zaujímavé je, že v tomto prípade ide o nárast až 51,5\% 
+oproti štatistike z roku 2009~\cite{ref_statista19}. Mobilné zariadenie
+prináša veľmi veľa nových možností výskumu ktoré sú orientované na správanie človeka.
+Dôvodom je hlavne veľké množstvo informácií ktoré sú možné vďaka senzorom v mobilnom 
+zariadenií zaznamenať. Tieto senzory zaznamenávajú takzvané biometricke črty.  
+Biometria sa zakladá na charakteristických črtách konkrétnej osoby. Tieto biometrické 
+črty sa delia na dva typy, a to na fyziologické a behaviorálne 
+(viď. Obr.~\ref{fig_rozdelenie_biometrie}).~\cite{ref_teh} Fyziologická biometria, 
+ako napríklad odtlačok prsta, je veľmi často využívanou overovacou technikou, 
+keďže je jedinečná a stála. Táto biometria má však aj svoje nevýhody. 
+DNA, čo je typickým príkladom tejto biometrie, je dosť invazívne na to, 
+aby sa využívalo napríklad na smartfónoch, keďže jej využitie by 
+vyžadovalo určitú podmienenú činnosť užívateľa, napríklad odber krvi. 
+Naopak behaviorálna biometria má výhodu v možnosti práce na pozadí bez akejkoľvek 
+určitej požadovanej činnosti užívateľa. Keďže sa jedná o charakteristiky, 
+ako napríklad rýchlosť písania, nakláňanie smartfónu alebo chôdza, 
+používateľove správanie môže byť overené počas bežných činností. ~\cite{ref_teh}
+Výhodou behaviorálnych črt je teda fakt, 
+že ak už zariadenie disponuje potrebným hardvérom, 
+v prípade mobilných zariadeniach napríklad senzormi, 
+je možné vykonávať rôzne opreácie ako napríklad autentifikáciu užívateľa alebo 
+identifikovanie stavu v akom sa užívateľ nachádza bez toho, aby o 
+tom samotný užívateľ vedel. Naopak nevýhodou tejto biometrie je, 
+že behaviorálne charakteristiky užívateľa sa časom menia, 
+a teda je potrebné častejšie vytvorenie profilu užívateľa ~\cite{ref_seyd}. 
+Jedným z problémov ktorý sa objavuje pri prácach s behaviorálnimy črtamy, 
+je množstvo atributov, ktoré sa získavajú zo senzorov.~\cite{ref_nascimento} 
+Získané atributy môžu obsahovať irelevantné/zavádzajúce informácie, ktoré
+môžu mať za následok zníženie kvality klasifikácie modelu.
+~\cite{ref_babatunde,ref_lu,ref_nascimento,ref_smith,ref_zhao} Práve výberom atributov sa 
+budeme v tejto práci bližšie zaoberať. Naša metóda na výber atributov spočíva vo využití 
+genetického algoritmu, ktorý bude aplikovaný na výber čŕt v datasete ktorý sa venuje skúmaniu
+stavu užívateľa (leží, chodí, sedí) na základe biometrických črt získaných z 
+mobilného zariadenia.~\cite{ref_dataset_anguita,ref_dataset}
+
+
+\begin{figure}
+\includegraphics[width=\textwidth]{image/rozdelenie_biometrie.png}
+\caption{Typy biometrických čŕt~\cite{ref_teh}} \label{fig_rozdelenie_biometrie}
+\end{figure}
+
 %Podobné práce / Related Work - ako riešili vašu alebo podobnú úlohu vexistujúcich prácach - nezabudnite v texte uvádzať citácie na práce.
 \section{Podobné práce}
+
+Výber atributou je veľmi podstatnou časťou pri strojovom učení. Veľmi veľa prác sa 
+zaoberá rôznymi metódami ktoré by boli nápomocné pri spracovávaní rôznich datasetov.
+V práci ~\cite{ref_nascimento} experimentovali nad dvoma databázami, pričom 
+prvá databáza mala 43 atributov a 231 záznamov. Druhá databáza obsahovala žé atributov 
+a 7555 záznamov. Dáta si rozdelily na testovaciu a trénovaciu množinu v pomere 66:33. 
+Teda 66\% bolo dát bolo určených na trénovanie modelu a 33\% dát na jeho trénovanie. 
+V práci využívajú na klasifikáciu modely KNN, SVM a Naive Bease. Na konci experimentu zhodnotili 
+že využitie genetického algoritmu na vyber atributov pri rôznych klasifikátoroch mal veľmi priaznivé
+účinky práve na SVM a to v zlepšení až o 14,55\% v prvom datasete a 11,77\% v druhom datasete.
+Keďže zlepšenie bolo viditeľne vidieť pri každom zo spomenutých klasifikátorov, v práci usúdili že
+využitie genetických algoritmov v tejto problematike zvyšuje presnosť klasifikátora.
+
+V ďalšej práci\cite{ref_babatunde} využili na výber atributov tri rôzne algoritmy a to 
+genetický algoritmus, WEKA-CFS a WEKA-ranker. Na vyhodnotenie taktiež použili viacero klasifikátorov
+a to Multi-Layer Perceptron (MLP), Random Forest (RF), J48, Naive Bayes a regresiu. Najlepšie výsledky 
+boli získané pomocou MLP. Ako najlepšia funkcia na výber atributov sa ukázal práve genetický algoritmus,
+ktorý má výhodu práve v širokej možnosti nastavovania.
 
 %opis použitého algoritmu - aj s odôvodnením výberu algoritmu
 \section{Využité algoritmy}
@@ -80,127 +123,56 @@ Ilkovičova 2, 842 16 Bratislava 4}
 \section{Záver}
 
 %Použitá literatúra / References - používajte LNCS štýl odkazovania sa nazdroje, pokyny nájdete aj v šablóne
-\section{Použitá literatúra}
+\begin{thebibliography}{8}
 
+\bibitem{ref_dataset_anguita}
+Anguita, D. et al.: A public domain dataset for human activity recognition using smartphones. ESANN 2013 proceedings, 21st Eur. Symp. Artif. Neural Networks, Comput. Intell. Mach. Learn. April, 437–442 (2013).
 
+\bibitem{ref_babatunde}
+Babatunde, O. et al.: A Genetic Algorithm-Based Feature Selection. Int. J. Electron. Commun. Comput. Eng. 5, 4, 899–905 (2014).
 
+\bibitem{ref_bomhold}
+Bomhold, C.R.: Educational use of smart phone technology: A survey of mobile phone application use by undergraduate university students. Program. 47, 4, 424–436 (2013). \doi{10.1108/PROG-01-2013-0003}.
 
+\bibitem{ref_frohlich}
+Fröhlich, H. et al.: Feature Selection for Support Vector Machines by Means of Genetic Algorithms. Proc. Int. Conf. Tools with Artif. Intell. 142–148 (2003). \doi{10.1142/s0218213004001818}.
 
+\bibitem{ref_ghareb}
+Ghareb, A.S. et al.: Hybrid feature selection based on enhanced genetic algorithm for text categorization. Expert Syst. Appl. 49, 31–47 (2016). \doi{10.1016/j.eswa.2015.12.004}.
 
+\bibitem{ref_khan}
+Khan, M.A. et al.: Erratum: An optimized method for segmentation and classification of apple diseases based on strong correlation and genetic algorithm based feature selection (EEE Access (2019) 7 (46261-46277). IEEE Access. 8, 36514 (2020). \doi{10.1109/ACCESS.2020.2974161}.
 
+\bibitem{ref_leardi}
+Leardi, R.: Application of a genetic algorithm to feature selection under full validation conditions and to outlier detection. J. Chemom. 8, 1, 65–79 (1994). \doi{10.1002/cem.1180080107}.
 
+\bibitem{ref_lu}
+Lu, H. et al.: A hybrid feature selection algorithm for gene expression data classification. Neurocomputing. 256, 2017, 56–62 (2017). \doi{10.1016/j.neucom.2016.07.080}.
 
+\bibitem{ref_nascimento}
+Nascimento, L.D.O. et al.: An investigation of genetic algorithm-based feature selection techniques applied to keystroke dynamics biometrics An investigation of genetic algorithm-based feature selection techniques applied to keystroke dynamics biometrics. SBSeg, 2–5 (2019).
 
+\bibitem{ref_smith}
+Smith, M.G., Bull, L.: Genetic programming with a genetic algorithm for feature construction and selection. Genet. Program. Evolvable Mach. 6, 3, 265–281 (2005). \doi{10.1007/s10710-005-2988-7}.
 
+\bibitem{ref_seyd}
+Syed, Z. et al.: Touch gesture-based authentication on mobile devices: The effects of user posture, device size, configuration, and inter-session variability. J. Syst. Softw. 149, 158–173 (2019). \doi{10.1016/j.jss.2018.11.017}.
 
+\bibitem{ref_statista19}
+statista.com, 2018. Percentage of all global web pages served to mobile phones from 2009 to 2018. \url{https://www.statista.com/statistics/241462/global-mobile-phone-website-traffic-share/}. Posledny prístup 10 Marca 2020
 
+\bibitem{ref_teh}
+Teh, P.S. et al.: A survey of keystroke dynamics biometrics. Sci. World J. 2013, (2013). \doi{10.1155/2013/408280}.
 
+\bibitem{ref_dataset}
+UC Irvine Machine Learning Repository, \url{https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones}. Posledny prístup 10 Marca 2020
 
-% Please note that the first paragraph of a section or subsection is
-% not indented. The first paragraph that follows a table, figure,
-% equation etc. does not need an indent, either.
+\bibitem{ref_wojcik}
+Wójcik, M.P. et al.: Measuring Cognitive Workload in Arithmetic Tasks Based on Response Time and EEG Features Architecture and Technology : Proceedings of 38th International Con- Measuring Cognitive Workload in Arithmetic Tasks Based on Response Time and EEG Features. Proc. 38th Int. Conf. Inf. Syst. Archit. Technol. 2, November 2017, (2018). \doi{10.1007/978-3-319-67220-5}.
 
-% Subsequent paragraphs, however, are indented.
+\bibitem{ref_zhao}
+Zhao, M. et al.: Feature selection and parameter optimization for support vector machines: A new approach based on genetic algorithm with feature chromosomes. Expert Syst. Appl. 38, 5, 5197–5204 (2011). \doi{10.1016/j.eswa.2010.10.041}.
 
-% \subsubsection{Sample Heading (Third Level)} Only two levels of
-% headings should be numbered. Lower level headings remain unnumbered;
-% they are formatted as run-in headings.
+\end{thebibliography}
 
-% \paragraph{Sample Heading (Fourth Level)}
-% The contribution should contain no more than four levels of
-% headings. Table~\ref{tab1} gives a summary of all heading levels.
-
-% \begin{table}
-% \caption{Table captions should be placed above the
-% tables.}\label{tab1}
-% \begin{tabular}{|l|l|l|}      
-% \hline
-% Heading level &  Example & Font size and style\\
-% \hline
-% Title (centered) &  {\Large\bfseries Lecture Notes} & 14 point, bold\\
-% 1st-level heading &  {\large\bfseries 1 Introduction} & 12 point, bold\\
-% 2nd-level heading & {\bfseries 2.1 Printing Area} & 10 point, bold\\
-% 3rd-level heading & {\bfseries Run-in Heading in Bold.} Text follows & 10 point, bold\\
-% 4th-level heading & {\itshape Lowest Level Heading.} Text follows & 10 point, italic\\
-% \hline
-% \end{tabular}
-% \end{table}
-
-
-% \noindent Displayed equations are centered and set on a separate
-% line.
-% \begin{equation}
-% x + y = z
-% \end{equation}
-% Please try to avoid rasterized images for line-art diagrams and
-% schemas. Whenever possible, use vector graphics instead (see
-% Fig.~\ref{fig1}).
-
-% \begin{figure}
-% \includegraphics[width=\textwidth]{image/fig1.png}
-% \caption{A figure caption is always placed below the illustration.
-% Please note that short captions are centered, while long ones are
-% justified by the macro package automatically.} \label{fig1}
-% \end{figure}
-
-% \begin{theorem}
-% This is a sample theorem. The run-in heading is set in bold, while
-% the following text appears in italics. Definitions, lemmas,
-% propositions, and corollaries are styled the same way.
-% \end{theorem}
-%
-% the environments 'definition', 'lemma', 'proposition', 'corollary',
-% 'remark', and 'example' are defined in the LLNCS documentclass as well.
-%
-
-
-% \begin{proof}
-% Proofs, examples, and remarks have the initial word in italics,
-% while the following text appears in normal font.
-% \end{proof}
-% For citations of references, we prefer the use of square brackets
-% and consecutive numbers. Citations using labels or the author/year
-% convention are also acceptable. The following bibliography provides
-% a sample reference list with entries for journal
-% articles~\cite{ref_article1}, an LNCS chapter~\cite{ref_lncs1}, a
-% book~\cite{ref_book1}, proceedings without editors~\cite{ref_proc1},
-% and a homepage~\cite{ref_url1}. Multiple citations are grouped
-% \cite{ref_article1,ref_lncs1,ref_book1},
-% \cite{ref_article1,ref_book1,ref_proc1,ref_url1}.
-
-
-%
-% ---- Bibliography ----
-%
-% BibTeX users should specify bibliography style 'splncs04'.
-% References will then be sorted and formatted in the correct style.
-%
-% \bibliographystyle{splncs04}
-% \bibliography{mybibliography}
-%
-
-
-
-
-% \begin{thebibliography}{8}
-% \bibitem{ref_article1}
-% Author, F.: Article title. Journal \textbf{2}(5), 99--110 (2016)
-
-% \bibitem{ref_lncs1}
-% Author, F., Author, S.: Title of a proceedings paper. In: Editor,
-% F., Editor, S. (eds.) CONFERENCE 2016, LNCS, vol. 9999, pp. 1--13.
-% Springer, Heidelberg (2016). \doi{10.10007/1234567890}
-
-% \bibitem{ref_book1}
-% Author, F., Author, S., Author, T.: Book title. 2nd edn. Publisher,
-% Location (1999)
-
-% \bibitem{ref_proc1}
-% Author, A.-B.: Contribution title. In: 9th International Proceedings
-% on Proceedings, pp. 1--2. Publisher, Location (2010)
-
-% \bibitem{ref_url1}
-% LNCS Homepage, \url{http://www.springer.com/lncs}. Last accessed 4
-% Oct 2017
-% \end{thebibliography}
 \end{document}
