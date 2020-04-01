@@ -29,7 +29,9 @@ Ilkovičova 2, 842 16 Bratislava 4}
     V tomto článku sme vytvorily genetický algoritmus, ktorý používame práve na výber funkcií. Nami vytvorenú
     metódu porovnávame s bežnými metódami ako sú Variance Inflation Factor (VIF) a vyber funkcií pomocou korelácií. 
     Zvolené metódy boli porovnané pomocou rôznych klasifikátorov ako sú napríklad KNN, SVM, Naive Bayes a iné. 
-    V práci sme využili verejný dataset~\cite{ref_dataset_anguita,ref_dataset} ktorý obsahuje biometrické dáta o užívateľoch. Tieto dáta obsahujú informácie o tom v akom stave sa nachádza užívateľ, teda či sedi: leží, sedí, kráča,  kráča hore schodmy, kráča dole schodmy alebo stojí.
+    V práci sme využili verejný dataset~\cite{ref_dataset_anguita,ref_dataset} ktorý obsahuje biometrické dáta o 
+    užívateľoch. Tieto dáta obsahujú informácie o tom v akom stave sa nachádza užívateľ, teda či sedi: leží, sedí, 
+    kráča,  kráča hore schodmy, kráča dole schodmy alebo stojí.
     V tejto práci sa ukázalo, že použitie genetického algoritmu zlepšilo výsledky jednotlivých klasifikátorov.
 
 \keywords{Behavioralna biometria \and Genetický algoritmus \and Strojové učenie \and Výber funkcií / atributov.}
@@ -105,18 +107,20 @@ V práci využívajú na klasifikáciu modely KNN, SVM a Naive Bease (viď. Tab.
 že využitie genetického algoritmu na vyber atributov pri rôznych klasifikátoroch mal veľmi priaznivé
 účinky práve na SVM a to v zlepšení až o 14,55\% v prvom datasete a 11,77\% v druhom datasete.
 Keďže zlepšenie bolo viditeľne vidieť pri každom zo spomenutých klasifikátorov, v práci usúdili že
-využitie genetických algoritmov v tejto problematike zvyšuje presnosť klasifikátora.
+využitie genetických algoritmov v tejto problematike zvyšuje presnosť klasifikátora. Naše riešenie chceme
+porovnať s existujúcimi algoritmamy na výber funkcií a to variance inflation factor (VIF) a výber na 
+základe korelácií.
 
 \begin{table}[]
 \centering
 \caption{Accuracy (pesnosť ACC) modelov v percentách výberu funkcií.~\cite{ref_nascimento}}\label{tab_vyber_funkci}
 \begin{tabular}{|c|c|c|c|}
 \hline
-                        & \multicolumn{3}{c|}{Bez výberu funkcií}                              \\ \hline
-Databáza             & KNN                   & SVM                   & Naive Bayes          \\ \hline
+                     & \multicolumn{3}{c|}{\textbf{Bez výberu funkcií}}                     \\ \hline
+\textbf{Databáza}    & \textbf{KNN}          & \textbf{SVM}          & \textbf{Naive Bayes} \\ \hline
 Da Silva et al. 2016 & 72.73 ±2.74           & 73.55 ±2.63           & 55.54±3.54           \\ \hline
 Giot et al. 2009     & 86.72 ±0.58           & 78.28 ±0.67           & 69.33 ±0.67          \\ \hline
-Databáza             & \multicolumn{3}{c|}{Využitie genetického algoritmu na výber funkcií} \\ \hline
+\textbf{Databáza}    & \multicolumn{3}{c|}{\textbf{Využitie genetického algoritmu na výber funkcií}} \\ \hline
 Da Silva et al. 2016 & 87.85±0.84            & 88.10 ±0.90           & 81.64 ±0.97          \\ \hline
 Giot et al. 2009     & 88.86 ±0.23           & 90.05±0.41            & 77.44 ±0.27          \\ \hline
 \end{tabular}
@@ -146,10 +150,63 @@ Naive Bayes kde sa klasifikácia zlepšila o 4,92 \%.
 
 
 %opis použitého algoritmu - aj s odôvodnením výberu algoritmu
-\section{Využité algoritmy}
+\section{Využívané algoritmy na výber funkcií}
+V tejto práci sme sa rozhodli porovnať genetický algoritmus na výber funkcií s
+algoritmamy Variance Inflation Factor a Výber funkcií pomocou korelácií. Tieto 
+algoritmy sa radia medzi základné algoritmy na výber funkcií. \cite{ref_xu}
 \subsection{Variance Inflation Factor}
-\subsection{Výber funkcií na pomocou korelácií}
+Tento algoritmus odstranuje funkcie ktoré majú veľmmi silnú kolinearitu.
+Vif odhaduje do akej miery je rozptyl koeficientu zväčšený kôli linearnej závislosti
+s inou prediktorom. Výpočet VIF pre každý stĺpec sa dá získať vykonaním lineárnej 
+regresie tohoto stĺpca s všetkými ostatnými stĺpcami.\cite{ref_xu}
+Vzorec pre výpočet VIF vyzerá nasledujúco:
+\begin{equation}
+VIF_{i}=\frac{1}{1-R_{i}^{2}}
+\end{equation}    
+V uvedenom vzorci \begin{math}R_i^2\end{math} predstavuje koeficint regresie medzi i-tou premennou a 
+všetkými ostatnými premennými. VIF sa pri výbere funkcí porovnáva a odstranujú sa hraničné hodnoty.\cite{ref_xu}
+
+\subsection{Výber funkcií pomocou korelácií}
+Funkcie sú vyberaná pomocou korelačného koeficientu. Koeficient korelácie je miera linearnej intenzity 
+korelácie. Najčastejšie je využívaný Pearsonov korelačný koeficient. Tento koeficient nadobúda hodnoty medzi
+1 až -1. 1 vo výsledku predstavuje perfektú pozitívnu koreláciu (podobnosť). Naopak -1 predstavuje 
+perfektńu negatívnu koreláciu (podobnosť). 0 označuje, že medzi prvkami nie je žiadna korelácia / podobnosť.
+Ak prebieha výbere funkcií touto metódou, vďaka výsledkom korelácie sa odstráňuju veľmi podobné funkcie.\cite{ref_xu}
+
 \subsection{Genetický algoritmus}
+
+Genetické algoritmy sú inšpirované evolúciou. Teda ich základ sa skladá z generácií ktoré sa vyvíjajú a obsahujú 
+určité množstvo chromozómv, ktoré sa spolu volajú populácia. Tieto chromozómy obsahujú kritické informácie 
+potrebné na vyriešenie problému. Tieto algoritmy sa využívaju najme na optimalizáciu rôznich
+problémov. Ich uplatnenie je v praxi veľmi široké.\cite{ref_babatunde,ref_whitley} Nami vytvorený algoritmus 
+sa skladá z ... (viď. Obr.~\ref{fig_ga_rozdelenie})
+
+\begin{figure}
+\includegraphics[width=\textwidth]{image/GA_alg.png}
+\caption{Schéma genetického algoritmu na výber funkcií} \label{fig_ga_rozdelenie}
+\end{figure}
+
+\subsubsection{Generovanie počiatočnej populácie}
+
+\begin{table}[]
+\centering
+\caption{Nastavenie genetického algoritmu}\label{tab_nastavenie_gen_alg}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Parametre GA}                    & \textbf{hodnota}  \\ \hline
+Fit funkcia založená na modely           & AdaBoost \\ \hline
+Reprezentácia génu                       & Boolean  \\ \hline
+Maximálny počet generácií                & 20       \\ \hline
+Veľkosť populácie                        & 100      \\ \hline
+Chromozómy vytvorené krížením            & 30       \\ \hline
+Chromozómy vytvorené generovaním         & 30       \\ \hline
+Najlepšie chromozómy z minulej generácie & 30       \\ \hline
+Percentuálna šanca mutácie               & 60\%     \\ \hline
+\end{tabular}
+\end{table}
+
+
+
 
 %opis vykonaných experimentov - opis použitého datasetu, opis cieľu a postupuexperimentu, opis nastavení algoritmu (odôvodnenie prečo zvolené nastavenia), opis metrík, ktorými experiment vyhodnocujete... ak sa porovnávate s existujúcimi riešeniami, nezabudnite ich citovať, prípadne aj stručne opísať
 \section{Experimenty}
@@ -202,8 +259,14 @@ Teh, P.S. et al.: A survey of keystroke dynamics biometrics. Sci. World J. 2013,
 \bibitem{ref_dataset}
 UC Irvine Machine Learning Repository, \url{https://archive.ics.uci.edu/ml/datasets/human+activity+recognition+using+smartphones}. Posledny prístup 10 Marca 2020
 
+\bibitem{ref_whitley}
+Whitley, D.: A genetic algorithm tutorial. Stat. Comput. 4, 2, 65–85 (1994). \doi{10.1007/BF00175354}.
+
 \bibitem{ref_wojcik}
 Wójcik, M.P. et al.: Measuring Cognitive Workload in Arithmetic Tasks Based on Response Time and EEG Features Architecture and Technology : Proceedings of 38th International Con- Measuring Cognitive Workload in Arithmetic Tasks Based on Response Time and EEG Features. Proc. 38th Int. Conf. Inf. Syst. Archit. Technol. 2, November 2017, (2018). \doi{10.1007/978-3-319-67220-5}.
+
+\bibitem{ref_xu}
+Xu, J. et al.: Methods for performing dimensionality reduction in hyperspectral image classification. (2018). \doi{10.1177/0967033518756175}.
 
 \bibitem{ref_zhao}
 Zhao, M. et al.: Feature selection and parameter optimization for support vector machines: A new approach based on genetic algorithm with feature chromosomes. Expert Syst. Appl. 38, 5, 5197–5204 (2011). \doi{10.1016/j.eswa.2010.10.041}.
