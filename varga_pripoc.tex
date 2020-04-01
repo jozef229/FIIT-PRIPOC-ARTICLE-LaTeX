@@ -3,6 +3,7 @@
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage[slovak]{babel}
+\usepackage{multirow}
 \PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 %
 \begin{document}
@@ -49,7 +50,9 @@ Zaujímavé je, že v tomto prípade ide o nárast až 51,5\%
 oproti štatistike z roku 2009~\cite{ref_statista19}. Mobilné zariadenie
 prináša veľmi veľa nových možností výskumu ktoré sú orientované na správanie človeka.
 Dôvodom je hlavne veľké množstvo informácií ktoré sú možné vďaka senzorom v mobilnom 
-zariadenií zaznamenať. Tieto senzory zaznamenávajú takzvané biometricke črty.  
+zariadenií zaznamenať. 
+
+Tieto senzory zaznamenávajú takzvané biometricke črty.  
 Biometria sa zakladá na charakteristických črtách konkrétnej osoby. Tieto biometrické 
 črty sa delia na dva typy, a to na fyziologické a behaviorálne 
 (viď. Obr.~\ref{fig_rozdelenie_biometrie}).~\cite{ref_teh} Fyziologická biometria, 
@@ -70,11 +73,14 @@ identifikovanie stavu v akom sa užívateľ nachádza bez toho, aby o
 tom samotný užívateľ vedel. Naopak nevýhodou tejto biometrie je, 
 že behaviorálne charakteristiky užívateľa sa časom menia, 
 a teda je potrebné častejšie vytvorenie profilu užívateľa ~\cite{ref_seyd}. 
+
 Jedným z problémov ktorý sa objavuje pri prácach s behaviorálnimy črtamy, 
 je množstvo atributov, ktoré sa získavajú zo senzorov.~\cite{ref_nascimento} 
 Získané atributy môžu obsahovať irelevantné/zavádzajúce informácie, ktoré
 môžu mať za následok zníženie kvality klasifikácie modelu.
-~\cite{ref_babatunde,ref_lu,ref_nascimento,ref_smith,ref_zhao} Práve výberom atributov sa 
+~\cite{ref_babatunde,ref_lu,ref_nascimento,ref_smith,ref_zhao} 
+
+Práve výberom atributov sa 
 budeme v tejto práci bližšie zaoberať. Naša metóda na výber atributov spočíva vo využití 
 genetického algoritmu, ktorý bude aplikovaný na výber čŕt v datasete ktorý sa venuje skúmaniu
 stavu užívateľa (leží, chodí, sedí) na základe biometrických črt získaných z 
@@ -95,17 +101,49 @@ V práci ~\cite{ref_nascimento} experimentovali nad dvoma databázami, pričom
 prvá databáza mala 43 atributov a 231 záznamov. Druhá databáza obsahovala žé atributov 
 a 7555 záznamov. Dáta si rozdelily na testovaciu a trénovaciu množinu v pomere 66:33. 
 Teda 66\% bolo dát bolo určených na trénovanie modelu a 33\% dát na jeho trénovanie. 
-V práci využívajú na klasifikáciu modely KNN, SVM a Naive Bease. Na konci experimentu zhodnotili 
+V práci využívajú na klasifikáciu modely KNN, SVM a Naive Bease (viď. Tab.~\ref{tab_vyber_funkci}). Na konci experimentu zhodnotili 
 že využitie genetického algoritmu na vyber atributov pri rôznych klasifikátoroch mal veľmi priaznivé
 účinky práve na SVM a to v zlepšení až o 14,55\% v prvom datasete a 11,77\% v druhom datasete.
 Keďže zlepšenie bolo viditeľne vidieť pri každom zo spomenutých klasifikátorov, v práci usúdili že
 využitie genetických algoritmov v tejto problematike zvyšuje presnosť klasifikátora.
+
+\begin{table}[]
+\centering
+\caption{Accuracy (pesnosť ACC) modelov v percentách výberu funkcií.~\cite{ref_nascimento}}\label{tab_vyber_funkci}
+\begin{tabular}{|c|c|c|c|}
+\hline
+                        & \multicolumn{3}{c|}{Bez výberu funkcií}                              \\ \hline
+Databáza             & KNN                   & SVM                   & Naive Bayes          \\ \hline
+Da Silva et al. 2016 & 72.73 ±2.74           & 73.55 ±2.63           & 55.54±3.54           \\ \hline
+Giot et al. 2009     & 86.72 ±0.58           & 78.28 ±0.67           & 69.33 ±0.67          \\ \hline
+Databáza             & \multicolumn{3}{c|}{Využitie genetického algoritmu na výber funkcií} \\ \hline
+Da Silva et al. 2016 & 87.85±0.84            & 88.10 ±0.90           & 81.64 ±0.97          \\ \hline
+Giot et al. 2009     & 88.86 ±0.23           & 90.05±0.41            & 77.44 ±0.27          \\ \hline
+\end{tabular}
+\end{table}
+
 
 V ďalšej práci\cite{ref_babatunde} využili na výber atributov tri rôzne algoritmy a to 
 genetický algoritmus, WEKA-CFS a WEKA-ranker. Na vyhodnotenie taktiež použili viacero klasifikátorov
 a to Multi-Layer Perceptron (MLP), Random Forest (RF), J48, Naive Bayes a regresiu. Najlepšie výsledky 
 boli získané pomocou MLP. Ako najlepšia funkcia na výber atributov sa ukázal práve genetický algoritmus,
 ktorý má výhodu práve v širokej možnosti nastavovania.
+
+Nasledujúca práca\cite{ref_zhao} využila genetický algoritmus na optimalizáciu nie 
+len výberu funkcií, ale aj výberu parametrov pre SVM klasifikátor. Výsledky im ukázali
+, že využitie tohoto algoritmu, nie len zlepšilo výsledky klasifikácie, 
+ale oproti využitia grid searchu aj zrýchlilo výpočet o 2,62 sekundy bez využitia
+vyberu funkcií a o 1,21 sekundy rýchlejšia ak sa výber funkcií využil.
+Presnosť klasifikácie sa zvýšila až o 3,57\%. 83,14 ± 7,19 boli najnižšie 
+získané hodnoty s využitím výberu funkcií založených na genetickom algoritme.
+
+Posledná skúmaná práca \cite{ref_smith} sa zaoberala predovsetkým klasifikátorom C4.5.
+Skúmali ako vplýva genetický algoritmus, ktorého fitnes funkcia pozostáva na strome, 
+na výber funkcií aj u iných algoritmov. Teda neskúšali využívať vo fitnes funkcii len
+klasifikátor s ktorým neskôr prebieha klasifikácia. Zistili že takáto fitnes funkcia,
+taktiež zlepšuje aj iné modely. Ich výsledky sa ukázali ak rovnakú funkciu použili na 
+Naive Bayes kde sa klasifikácia zlepšila o 4,92 \%.
+
 
 %opis použitého algoritmu - aj s odôvodnením výberu algoritmu
 \section{Využité algoritmy}
@@ -142,9 +180,6 @@ Ghareb, A.S. et al.: Hybrid feature selection based on enhanced genetic algorith
 
 \bibitem{ref_khan}
 Khan, M.A. et al.: Erratum: An optimized method for segmentation and classification of apple diseases based on strong correlation and genetic algorithm based feature selection (EEE Access (2019) 7 (46261-46277). IEEE Access. 8, 36514 (2020). \doi{10.1109/ACCESS.2020.2974161}.
-
-\bibitem{ref_leardi}
-Leardi, R.: Application of a genetic algorithm to feature selection under full validation conditions and to outlier detection. J. Chemom. 8, 1, 65–79 (1994). \doi{10.1002/cem.1180080107}.
 
 \bibitem{ref_lu}
 Lu, H. et al.: A hybrid feature selection algorithm for gene expression data classification. Neurocomputing. 256, 2017, 56–62 (2017). \doi{10.1016/j.neucom.2016.07.080}.
