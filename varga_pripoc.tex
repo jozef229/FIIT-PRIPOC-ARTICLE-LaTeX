@@ -254,7 +254,6 @@ Nad každým génom vygenerujé náhodné číslo na základe ktorého sa s 60\%
 \caption{Mutovanie chromozómov} \label{fig_ga_mutovanie}
 \end{figure}
 
-
 %opis vykonaných experimentov - opis použitého datasetu, opis cieľu a postupuexperimentu, opis nastavení algoritmu (odôvodnenie prečo zvolené nastavenia), opis metrík, ktorými experiment vyhodnocujete... ak sa porovnávate s existujúcimi riešeniami, nezabudnite ich citovať, prípadne aj stručne opísať
 \section{Experimenty}
 
@@ -275,8 +274,8 @@ vektorom s 561 funkciami, ktoré obsahujú:
 \item Označenie konkrétneho subjektu
 \end{itemize}
 
-Nad týmto datasetom sa snažíme overiť a porovnať silu genetický algoritmu s tým, že porovnávame 
-jeho získané skóre so skóre, ktoré získa algoritmus VIF alebo analýza na základe korelácií. Skóre sa 
+Nad týmto datasetom sa snažíme overiť a porovnať silu genetického algoritmu oproti štandardným metódam. Porovnávame 
+jeho získané accurancy skóre so skóre, ktoré získa algoritmus VIF alebo analýza na základe korelácií. Skóre sa 
 vypočítavalo ako fit funkcia. Teda 10 násobnou krížovou validaciou. Modely ktoré sme využili v experimente boli 
 AdaBoost, Decision Tree, Extra Trees, Naive Bayes, Nearest Neighbors, Linear Discriminant Analysis, 
 Logistic Regression, Neural Net, Random Forest, SVM Sigmoid, SVM RBF, QDA.
@@ -284,8 +283,82 @@ Logistic Regression, Neural Net, Random Forest, SVM Sigmoid, SVM RBF, QDA.
 %Vyhodnotenie / Evaluation - prehľadné výsledky experimentov (formou textového opisu, grafov, tabuliek, ...)
 \section{Vyhodnotenie}
 
+Výsledky experimentu sú zobrazené v tabuľke ~\ref{tab_nastavenie_vyhodnotenie_experimentu} 
+a tabuľke ~\ref{tab_pocet_vyber_atributov} . Využitie genetického algoritmu
+nám v tomto experimente ukázalo, že časovo najnáročnejšie na predspracovanie bol algoritmus 
+VIF. Oproti GA bol tento algoritmus až 13 krát pomalší. Ak sa poredpokladá 
+zlepšenie GA zvýšením počtom generácií, vieme povedať, že výsledky GA je ešte možné zlepšiť 
+zvýšením jeho časového zaťaženia. Čo sa týka počtu výberu atributov, Každý z 
+použitých algoritmuv znížil počet atributov o viac ako polovicu, čím sa znížil čas následného 
+trénovania. Najviac atributov vyfiltroval VIF a to až o 70 atributov viac ako GA. 
+Zaujímavosťou je práve výsledné skóre GA, ktoré potvrdzuje, že výberom správneho algoritmu 
+do fit funkcie sa výrazne zvýši výsledná klasifikácia modelu, ktorý je použitý
+ako základ tejto funkcie. Získané výsledky taktiež ukazujú, že nie je potrebné aby sa 
+zhodovalo jadro fit funkcie s modelom, ktorý je klasifikátorom. Toto je vidieť 
+hlavne pri modeloch Neural Net a QDA, kde aj pri použití fit funkcie s jadrom 
+Nearest Neighbors sa zvýšilo skóre klasifikácie týchto modelov o viac ako 15\% oproti 
+klasifikácii nad neupravenými atributmi. Najväčšie zlepšenie je vidieť na algoritme 
+Nearest Neighbors, kde sa klasifikácia zlepšila o 78\%. Dôvodom je práve využitie tohoto algoritmu vo fit funkcii.
+Výsledky taktiež ukazujú, že ak bol VIF lepší oproti GA, tak rozdiel bol najviac 1\% okrem QDA 
+kde bol rozdiel 4\% a Naive Bayes s rozdielom 8\%. Tieto rozdieli môžu byť zanedbateľné v prípade ak
+je potrebné znížiť časové žaťaženie na predspraccovanie keďže VIF je 13 krat pomalší.
+
+\begin{table}[]
+    \centering
+    \caption{Počet vybratých atributov}\label{tab_pocet_vyber_atributov}
+    \begin{tabular}{|l|c|c|c|c|}
+    \hline
+    \textbf{Algoritmus}                  & GA        & VIF         & CORR          & Bez funkcie výberu \\ \hline
+    \textbf{Počet atributov}            & 260        & 190         & 255          & 562 \\ \hline
+    \end{tabular}
+\end{table}
+
+
+
+\begin{table}[]
+    \centering
+    \caption{Výsledky genetického algoritmu}\label{tab_nastavenie_vyhodnotenie_experimentu}
+    \begin{tabular}{|l|c|c|c|c|c|c|}   
+    \hline
+    \textbf{Model}               & \multicolumn{3}{c|}{\textbf{ACC}}                       & \textbf{ Najlepší  } \\ 
+                                 & \textbf{GA} & \textbf{VIF} & \textbf{CORR}& \textbf{výsledok}  \\ \hline
+    AdaBoost                     & 0.54        & 0.55         & 0.54       & VIF   \\ \hline
+    Decision Tree                & 0.84        & 0.85         & 0.84       & VIF     \\ \hline
+    Extra Trees                  & 0.77        & 0.70         & 0.68       & GA       \\ \hline
+    Naive Bayes                  & 0.79        & 0.87         & 0.81       & VIF        \\ \hline
+    Nearest Neighbors            & 0.92        & 0.14         & 0.14       & GA            \\ \hline
+    Linear Discriminant Analysis & 0.95        & 0.95         & 0.94       & GA, VIF              \\ \hline
+    Logistic Regression          & 0.95        & 0.96         & 0.95       & VIF         \\ \hline
+    Neural Net                   & 0.94        & 0.71         & 0.69       & GA           \\ \hline
+    Random Forest                & 0.73        & 0.70         & 0.70       & GA              \\ \hline
+    SVM Sigmoid                  & 0.19        & 0.19         & 0.19       & Všetky         \\ \hline
+    SVM RBF                      & 0.21        & 0.19         & 0.19       & GA           \\ \hline
+    QDA                          & 0.87        & 0.91         & 0.87       & VIF           \\ \hline
+    \end{tabular}
+\end{table}
+
 %Záver / Conclusion
 \section{Záver}
+
+
+Ako už bolo uvedené vo vyhodnotení, experiment sa uskutočnil nad existujúcim datasetom, 
+ktorý obsahoval behaviorálne dáta o stavoch používateľov~\cite{ref_dataset_anguita,ref_dataset}.
+Dataset bol vyhodnocovaný pomocou 11 modelov, a 10 násobnej krížovej validácie.
+Podľa výsledkov uvedených v tabuľke ~\ref{tab_nastavenie_vyhodnotenie_experimentu} 
+a tabuľke ~\ref{tab_pocet_vyber_atributov} je možné pozorovať, že využitie rovnakého klasifikátora
+ako je použitý vo fit funkci je veľmi účinné a zvýšuje klasifikáciu. Taktiež znižuje počet atributov,
+čo má za následok zrýchlenie následnej klasifikácie. Taktiež je vidieť že je možné zvýšiť klasifikáciu
+využitím genetického algoritmu oproti klasifikácii nat neupravenými dátamy. 
+
+Proces výberu atribútov je jedným z najdôležitejších krokov v predspracovaní údajov. Datasety 
+obsahujúce behaviorálne dáta obsahujú veľmi veľa atribútov, čo môže vyžadovať vysokú výpočtovú silu. V našom
+experimente je taktiež vidieť že GA znížilo počet atributov o viac ako polovicu s tým že zvýšil presnosť klasifikátoru.
+Preto je práve výber atributov, ktoré sú podstatné pre klasifikáciu, môže zvýšiť presnosť klasifikácie
+ako je ukázane vyžšie. Použitie genetických algoritmov sa zdá byť lepšie, aj oproti VIF vďaka nižšej záťaži.
+Najlepší klasifikátor pre náš dataset bol Logistic Redression s 96\% úspešnosťou. Medzi najlepšie tiež patria
+modely Linear Discriminant Analysis s 95\%, Neural Net s 94\% a Nearest Neighbors s úspešnosťou 92\%. 
+
+Ďalšie pokračovanie tejto práci by bolo zamerané na zmeny fit funkcie, a sledovať možné ovplivnenie ostatných modelov.
 
 %Použitá literatúra / References - používajte LNCS štýl odkazovania sa nazdroje, pokyny nájdete aj v šablóne
 \begin{thebibliography}{8}
