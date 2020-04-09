@@ -31,12 +31,13 @@ Ilkovičova 2, 842 16 Bratislava 4}
     a taktiež degradujú kvalitu klasifikácie. 
     
     V tomto článku sme vytvorily genetický algoritmus, ktorý používame práve na výber funkcií. Nami vytvorenú
-    metódu porovnávame s bežnými metódami ako sú Variance Inflation Factor (VIF) a vyber funkcií pomocou korelácií. 
-    Zvolené metódy boli porovnané pomocou rôznych klasifikátorov ako sú napríklad K-Nearest Neighbors (KNN), SVM, Naive Bayes a iné. 
+    metódu porovnávame s bežnými metódami ako sú Variance Inflation Factor (VIF) a vyber funkcií pomocou korelácií (CORR). 
+    Zvolené metódy boli porovnané pomocou rôznych klasifikátorov, ako sú napríklad K-Nearest Neighbors (KNN), SVM, Naive Bayes a iné. 
     V práci sme využili verejný dataset~\cite{ref_dataset_anguita,ref_dataset} ktorý obsahuje biometrické dáta o 
-    užívateľoch. Tieto dáta obsahujú informácie o tom v akom stave sa nachádza užívateľ, teda či leží, sedí, 
+    užívateľoch. Tieto dáta obsahujú informácie o tom, v akom stave sa nachádza užívateľ, teda či leží, sedí, 
     kráča,  kráča hore schodmy, kráča dole schodmy alebo stojí.
-    V tejto práci sa ukázalo, že použitie genetického algoritmu zlepšilo výsledky jednotlivých klasifikátorov.
+    V tejto práci sa ukázalo, že použitie genetického algoritmu zlepšilo výsledky jednotlivých klasifikátorov. 
+    A má veľký potenciál čo sa týka využitia v tejto problematike.
 
 \keywords{Behavioralna biometria \and Genetický algoritmus \and Strojové učenie \and Výber funkcií / atributov.}
 \end{abstract}
@@ -74,7 +75,7 @@ používateľove správanie môže byť overené počas bežných činností. ~\
 Výhodou behaviorálnych črt je teda fakt, 
 že ak už zariadenie disponuje potrebným hardvérom, 
 v prípade mobilných zariadeniach napríklad senzormi, 
-je možné vykonávať rôzne opreácie ako napríklad autentifikáciu užívateľa alebo 
+je možné vykonávať rôzne opreácie ako napríklad autentifikáciu užívateľa, alebo 
 identifikovanie stavu v akom sa užívateľ nachádza bez toho, aby o 
 tom samotný užívateľ vedel. Naopak nevýhodou tejto biometrie je, 
 že behaviorálne charakteristiky užívateľa sa časom menia, 
@@ -102,13 +103,14 @@ mobilného zariadenia.~\cite{ref_dataset_anguita,ref_dataset}
 \section{Podobné práce}
 
 Výber atributou je veľmi podstatnou časťou pri strojovom učení. Veľmi veľa prác sa 
-zaoberá rôznymi metódami ktoré by boli nápomocné pri spracovávaní rôznich datasetov.
+zaoberá rôznymi metódami, ktoré by boli nápomocné pri spracovávaní rôznich datasetov.
 V práci ~\cite{ref_nascimento} experimentovali nad dvoma databázami, pričom 
 prvá databáza mala 43 atributov a 231 záznamov. Druhá databáza obsahovala 60 atributov 
 a 7555 záznamov. Dáta si rozdelily na testovaciu a trénovaciu množinu v pomere 66:33. 
 Teda 66\% bolo dát bolo určených na trénovanie modelu a 33\% dát na jeho testovanie. 
-V práci využívajú na klasifikáciu modely K-Nearest Neighbors (KNN), SVM a Naive Bease (viď. Tab.~\ref{tab_vyber_funkci}). Na konci experimentu zhodnotili 
-že využitie genetického algoritmu na vyber atributov pri rôznych klasifikátoroch mal veľmi priaznivé
+V práci využívajú na klasifikáciu modely K-Nearest Neighbors (KNN), SVM a Naive Bease 
+(viď. Tab.~\ref{tab_vyber_funkci}). Na konci experimentu zhodnotili, 
+že využitie genetického algoritmu na vyber atributov pri rôznych klasifikátoroch malo veľmi priaznivé
 účinky práve na SVM a to v zlepšení až o 14,55\% v prvom datasete a 11,77\% v druhom datasete.
 Keďže zlepšenie bolo viditeľne vidieť pri každom zo spomenutých klasifikátorov, v práci usúdili že
 využitie genetických algoritmov v tejto problematike zvyšuje presnosť klasifikátora.
@@ -150,8 +152,8 @@ taktiež zlepšuje aj iné modely. Ich výsledky ukázali že ak rovnakú funkci
 Naive Bayes tak jeho klasifikácia sa zlepšila o 4,92 \%.
 
 Naš vytvorený genetický algoritmus chceme porovnať aj s existujúcimi algoritmamy na výber 
-funkcií a to variance inflation factor (VIF) a výber na základe korelácií. Využiť chceme
-na fitnes funkciu len jeden algoritmus ako buďe spomenuté v nasledujúcej kapitole.
+funkcií a to variance inflation factor (VIF) a výber na základe korelácií (CORR). Využiť chceme
+na fitnes funkciu len jeden algoritmus a to K-Nearest Neighbors (KNN), ako buďe spomenuté v nasledujúcej kapitole.
 
 
 %opis použitého algoritmu - aj s odôvodnením výberu algoritmu
@@ -177,7 +179,7 @@ korelácie. Najčastejšie je využívaný Pearsonov korelačný koeficient. Ten
 \begin{math}1\end{math} až \begin{math}-1\end{math}. \begin{math}1\end{math} vo výsledku predstavuje perfektnú pozitívnu 
 koreláciu (podobnosť). Naopak \begin{math}-1\end{math} predstavuje 
 perfektńu negatívnu koreláciu (podobnosť). \begin{math}0\end{math} označuje, že medzi prvkami nie je žiadna korelácia / podobnosť.
-Ak prebieha výbere funkcií touto metódou, vďaka výsledkom korelácie sa odstráňuju veľmi podobné funkcie.\cite{ref_xu}
+Ak prebieha výbere funkcií touto metódou, vďaka výsledkom korelácie sa odstráňuju takmer totožné stĺpce.\cite{ref_xu}
 
 \subsection{Genetický algoritmus}
 
@@ -196,7 +198,7 @@ inicializáciou populácie genetického algoritmu (viď. Obr.~\ref{fig_ga_rozdel
 Pri inicializácií sa nastavia prvotné atributy genetického algoritmu (viď. Tab.~\ref{tab_nastavenie_gen_alg}). 
 V algoritme je chromozóm reprezentovaný \begin{math}n\end{math} génmy. Jeden gén prezentuje \begin{math}1\end{math} 
 alebo \begin{math}0\end{math} ktorá hovorý či vo výslednom vektore funkcií sa táto funkcia nachádza alebo nie. 
-Počet tých to génov \begin{math}n\end{math} je počtom funkcií ktoré sú vo vstupnom vektore. Teda 
+Počet týchto génov \begin{math}n\end{math} je počtom funkcií, ktoré sú vo vstupnom vektore. Teda 
 koľko funkcií má daný dataset.
 
 \begin{table}[]
@@ -234,7 +236,7 @@ novo vytvoreným chromozómom.
 
 Pri krýžení sa spájajú vlastnosti dvoch jedincov do jedného (viď. Obr.~\ref{fig_ga_krizenie}).
 Do kríženia vstupujú dva chromozómy, ktoré majú zrkadlové postavenie v zoradenom liste podľa fit funkcie. 
-Jeden chromozóm je teda z časti kde je fit funkcia najsilnejšia a jeden z časti kde je fit funkcia naopak slabšia. 
+Jeden chromozóm je teda z časti, kde je fit funkcia najsilnejšia a jeden z časti kde je fit funkcia naopak slabšia. 
 Tento spôsob by mal pomôcť algoritmu aby nezastal na lokálnom maxime. Následne sa prechádza po génoch 
 jednotlivých chromozómov a podľa percentuálnej náhody sa vyberie jeden z génov do budúceho jedinca.
 Šanca s akou sa jednotlivé gény volia, ako aj počet takto vytvorených jedincov sa v genetickom algoritme
@@ -245,7 +247,7 @@ nastavuje pomocou parametrov (viď. Tab.~\ref{tab_nastavenie_gen_alg}).
 \caption{Kríženie chromozómov} \label{fig_ga_krizenie}
 \end{figure}
 
-Zvyšné chromozómy sa náhodne vygenerujú ako pri inicializácií aby počet chromozómov v každej generácií bol rovnaky. 
+Zvyšné chromozómy sa náhodne vygenerujú ako pri inicializácií, aby počet chromozómov v každej generácií bol rovnaky. 
 Ako posledné prejde algoritmus k mutácií. Tá prejde všetky chromozómy v zadanej populácií a prechádza jednotlivé gény.
 Nad každým génom vygenerujé náhodné číslo na základe ktorého sa s 60\% šancov zmení gén na opačný (viď. Obr.~\ref{fig_ga_mutovanie}). 
 
@@ -262,7 +264,7 @@ základe pilotných testov nad rôznimy datami. V experimente využijeme dataset
 záznamy z mobilného zariadenia~\cite{ref_dataset_anguita,ref_dataset}. Tento dataset slúži na klasifikovanie
 stavu používateľa. Teda či používateľ leží, sedí, kráča, kráča hore schodmy, kráča dole schodmy alebo stojí.
 Dataset obsahuje informácie o 30 dobrovolníkoch vo veku 19 až 48 rokov. Každý používateľ vykonal spomenutých
-6 aktivít pri ktorých mal na páse pripevnený smartfón Samsung Galaxy S II. Dataset obsahuje informácie z 
+6 aktivít, pri ktorých mal na páse pripevnený smartfón Samsung Galaxy S II. Dataset obsahuje informácie z 
 gyroskopu a akcelerometra. Z nich sa zaznamenávalo 3-osové lineárne zrýchlenie a 3-osové uhlové rýchlosti 
 pri konštantnej rýchlosti 50 Hz. V datasete sa nachádza 3609 záznamov. Pre každý záznam v datasete sa poskytuje 
 vektorom s 561 funkciami, ktoré obsahujú:
@@ -296,9 +298,9 @@ do fit funkcie sa výrazne zvýši výsledná klasifikácia modelu, ktorý je po
 ako základ tejto funkcie. Získané výsledky taktiež ukazujú, že nie je potrebné aby sa 
 zhodovalo jadro fit funkcie s modelom, ktorý je klasifikátorom. Toto je vidieť 
 hlavne pri modeloch Neural Net a QDA, kde aj pri použití fit funkcie s jadrom 
-Nearest Neighbors sa zvýšilo skóre klasifikácie týchto modelov o viac ako 15\% oproti 
+K-Nearest Neighbors sa zvýšilo skóre klasifikácie týchto modelov o viac ako 15\% oproti 
 klasifikácii nad neupravenými atributmi. Najväčšie zlepšenie je vidieť na algoritme 
-Nearest Neighbors, kde sa klasifikácia zlepšila o 78\%. Dôvodom je práve využitie tohoto algoritmu vo fit funkcii.
+K-Nearest Neighbors, kde sa klasifikácia zlepšila o 78\%. Dôvodom je práve využitie tohoto algoritmu vo fit funkcii.
 Výsledky taktiež ukazujú, že ak bol VIF lepší oproti GA, tak rozdiel bol najviac 1\% okrem QDA 
 kde bol rozdiel 4\% a Naive Bayes s rozdielom 8\%. Tieto rozdieli môžu byť zanedbateľné v prípade ak
 je potrebné znížiť časové žaťaženie na predspraccovanie keďže VIF je 13 krat pomalší.
@@ -346,19 +348,19 @@ ktorý obsahoval behaviorálne dáta o stavoch používateľov~\cite{ref_dataset
 Dataset bol vyhodnocovaný pomocou 11 modelov, a 10 násobnej krížovej validácie.
 Podľa výsledkov uvedených v tabuľke ~\ref{tab_nastavenie_vyhodnotenie_experimentu} 
 a tabuľke ~\ref{tab_pocet_vyber_atributov} je možné pozorovať, že využitie rovnakého klasifikátora
-ako je použitý vo fit funkci je veľmi účinné a zvýšuje klasifikáciu. Taktiež znižuje počet atributov,
+ako je použitý vo fit funkci, je veľmi účinné a zvýšuje presnosť klasifikácie. Taktiež znižuje počet atributov,
 čo má za následok zrýchlenie následnej klasifikácie. Taktiež je vidieť že je možné zvýšiť klasifikáciu
-využitím genetického algoritmu oproti klasifikácii nat neupravenými dátamy. 
+využitím genetického algoritmu oproti klasifikácii neupravených dát. 
 
 Proces výberu atribútov je jedným z najdôležitejších krokov v predspracovaní údajov. Datasety 
 obsahujúce behaviorálne dáta obsahujú veľmi veľa atribútov, čo môže vyžadovať vysokú výpočtovú silu. V našom
-experimente je taktiež vidieť že GA znížilo počet atributov o viac ako polovicu s tým že zvýšil presnosť klasifikátoru.
-Preto je práve výber atributov, ktoré sú podstatné pre klasifikáciu, môže zvýšiť presnosť klasifikácie
-ako je ukázane vyžšie. Použitie genetických algoritmov sa zdá byť lepšie, aj oproti VIF vďaka nižšej záťaži.
-Najlepší klasifikátor pre náš dataset bol Logistic Redression s 96\% úspešnosťou. Medzi najlepšie tiež patria
-modely Linear Discriminant Analysis s 95\%, Neural Net s 94\% a Nearest Neighbors s úspešnosťou 92\%. 
+experimente je taktiež vidieť že GA znížilo počet atributov o viac ako polovicu s tým, že zvýšil presnosť klasifikátoru.
+Preto práve výber atributov, ktoré sú podstatné pre klasifikáciu, môže zvýšiť presnosť klasifikácie
+ako je ukázane vyžšie. Použitie genetických algoritmov sa zdá byť lepšie, aj oproti VIF vďaka nižšej časovej záťaži.
+Najlepší klasifikátor pre náš dataset bol Logistic Redression a Linear Discriminant Analysis s 95\% úspešnosťou. Medzi najlepšie tiež patria
+Neural Net s 94\% a Nearest Neighbors s úspešnosťou 92\%.
 
-Ďalšie pokračovanie tejto práci by bolo zamerané na zmeny fit funkcie, a sledovať možné ovplivnenie ostatných modelov.
+Ďalšie pokračovanie tejto práci by bolo zamerané na zmeny fit funkcie, pričom cielom by bolo sledovať chovanie výsledkov ostatných modelov.
 
 %Použitá literatúra / References - používajte LNCS štýl odkazovania sa nazdroje, pokyny nájdete aj v šablóne
 \begin{thebibliography}{8}
