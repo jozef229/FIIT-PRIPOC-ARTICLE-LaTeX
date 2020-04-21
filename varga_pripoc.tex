@@ -33,8 +33,8 @@ Ilkovičova 2, 842 16 Bratislava 4}
     a~taktiež degradujú kvalitu klasifikácie. 
     
     \tab V tomto článku sme vytvorili genetický algoritmus, ktorý používame práve na~výber artibutov. Nami vytvorenú
-    metódu porovnávame s bežnými metódami ako sú Variance Inflation Factor (VIF) a~výber atribútov pomocou korelácií (CORR). 
-    Zvolené metódy boli porovnané pomocou rôznych klasifikátorov, ako sú napríklad K-Nearest Neighbors (KNN), SVM, Naive Bayes a~iné. 
+    metódu porovnávame s bežnými metódami ako sú faktor inflácie (angl. Variance Inflation Factor,skr. VIF) a~výber atribútov pomocou korelácií. 
+    Zvolené metódy boli porovnané pomocou rôznych klasifikátorov, ako sú napríklad k najbližších susedov (angl. K-Nearest Neighbors, skr. KNN), metóda podporných vektorov (angl. support vector machines, skr. SVM), Naivný bayesovský klasifikátor(angl. Naive Bayes) a~iné. 
     V práci sme využili verejný dataset~\cite{ref_dataset_anguita,ref_dataset}, ktorý obsahuje biometrické dáta o 
     používateľoch. Tieto dáta obsahujú informácie o tom, v akom stave sa nachádza používateľ, teda či leží, sedí, 
     kráča,  kráča hore schodami, kráča dole schodami alebo stojí.
@@ -119,10 +119,10 @@ využitie genetických algoritmov v tejto problematike zvyšuje presnosť klasif
 
 \begin{table}[]
 \centering
-\caption{Presnosť (angl. accuracy, skr. ACC) modelov výberu funkcií v percentách ~\cite{ref_nascimento}.}\label{tab_vyber_funkci}
+\caption{Presnosť (angl. accuracy, skr. ACC) modelov výberu atributov v percentách ~\cite{ref_nascimento}.}\label{tab_vyber_funkci}
 \begin{tabular}{|c|c|c|c|}
 \hline
-                     & \multicolumn{3}{c|}{\textbf{Bez výberu funkcií}}                     \\ \hline
+                     & \multicolumn{3}{c|}{\textbf{Bez výberu atributov}}                     \\ \hline
 \textbf{Databáza}    & \textbf{KNN}          & \textbf{SVM}          & \textbf{Naive Bayes} \\ \hline
 Da Silva et al. 2016 & 72,73 ± 2,74           & 73,55 ± 2,63           & 55,54 ± 3,54           \\ \hline
 Giot et al. 2009     & 86,72 ± 0,58           & 78,28 ± 0,67           & 69,33 ± 0,67          \\ \hline
