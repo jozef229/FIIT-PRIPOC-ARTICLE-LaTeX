@@ -26,10 +26,10 @@ Ilkovičova 2, 842 16 Bratislava 4}
 %
 \begin{abstract}
     . Výber atribútov je v strojovom učení náročnou kombinatorickou úlohou. 
-    Atribúty, ktoré neskôr vstupujú do rôznych modelov v strojovom učení, majú
+    Atribúty, ktoré neskôr vstupujú do~rôznych modelov v~strojovom učení, majú
     veľký vplyv na~následnú presnosť a~rýchlosť samotného modelu. Toto je jeden z~problémov,
-    ktorý sa vyskytuje pri autorizovaní používateľa pomocou behaviorálnej biometrie. Práve pri
-    zaznamenávaní dát o používateľovi získame veľké množstvo atribútov, ktoré znižujú rýchlosť výpočtu
+    ktorý sa~vyskytuje pri autorizovaní používateľa pomocou behaviorálnej biometrie. Práve pri
+    zaznamenávaní dát o~používateľovi získame veľké množstvo atribútov, ktoré znižujú rýchlosť výpočtu
     a~taktiež degradujú kvalitu klasifikácie. 
     
     \tab V tomto článku sme vytvorili genetický algoritmus, ktorý používame práve na~výber artibutov. Nami vytvorenú
@@ -41,7 +41,7 @@ Ilkovičova 2, 842 16 Bratislava 4}
     V tejto práci sa ukázalo, že použitie genetického algoritmu zlepšilo výsledky jednotlivých klasifikátorov a~
     má veľký potenciál, čo sa týka využitia, v tejto problematike.
 
-\keywords{Behaviorálna biometria \and Genetický algoritmus \and Strojové učenie \and Výber funkcií / atribútov.}
+\keywords{Behaviorálna biometria \and Genetický algoritmus \and Strojové učenie \and Výber atribútov.}
 \end{abstract}
 %
 
@@ -64,7 +64,7 @@ zariadení zaznamenať.
 Tieto senzory zaznamenávajú takzvané biometrické črty.  
 Biometria sa zakladá na~charakteristických črtách konkrétnej osoby. Tieto biometrické 
 črty sa delia na~dva typy, a~to na~fyziologické a~behaviorálne 
-(viď. Obr.~\ref{fig_rozdelenie_biometrie})~\cite{ref_teh}. Fyziologická biometria, 
+(pozri Obr.~\ref{fig_rozdelenie_biometrie})~\cite{ref_teh}. Fyziologická biometria, 
 ako napríklad odtlačok prsta, je veľmi často využívanou overovacou technikou, 
 keďže je jedinečná a~stála. Táto biometria má však aj svoje nevýhody. 
 DNA, čo je typickým príkladom tejto biometrie, je dosť invazívne na~to, 
@@ -83,7 +83,7 @@ tom samotný používateľ vedel. Naopak nevýhodou tejto biometrie je,
 že behaviorálne charakteristiky používateľa sa časom menia, 
 a teda je potrebné častejšie vytvorenie profilu používateľa ~\cite{ref_seyd}. 
 
-Jedným z~problémov, ktorý sa objavuje pri prácach s behaviorálnimi črtami, 
+Jedným z~problémov, ktorý sa objavuje pri prácach s behaviorálnimi atributmi, 
 je množstvo atribútov, ktoré sa získavajú zo senzorov ~\cite{ref_nascimento}. 
 Získané atribúty môžu obsahovať irelevantné/zavádzajúce informácie, ktoré
 môžu mať za následok zníženie kvality klasifikácie modelu
@@ -91,8 +91,8 @@ môžu mať za následok zníženie kvality klasifikácie modelu
 
 Práve výberom atribútov sa 
 budeme v tejto práci bližšie zaoberať. Naša metóda na~výber atribútov spočíva vo využití 
-genetického algoritmu, ktorý bude aplikovaný na~výber čŕt v datasete, ktorý sa venuje skúmaniu
-stavu používateľa (leží, chodí, sedí) na~základe biometrických črt získaných z~
+genetického algoritmu, ktorý bude aplikovaný na~výber atributov v datasete, ktorý sa venuje skúmaniu
+stavu používateľa (leží, chodí, sedí) na~základe biometrických atributov získaných z~
 mobilného zariadenia ~\cite{ref_dataset_anguita,ref_dataset}.
 
 
@@ -108,10 +108,10 @@ Výber atribútov je veľmi podstatnou časťou pri strojovom učení. Veľmi ve
 zaoberá rôznymi metódami, ktoré by boli nápomocné pri spracovávaní rôznych datasetov.
 V práci ~\cite{ref_nascimento} experimentovali nad dvoma databázami, pričom 
 prvá databáza mala 43 atribútov a~231 záznamov. Druhá databáza obsahovala 60 atribútov 
-a 7555 záznamov. Dáta si rozdelili na~testovaciu a~trénovaciu množinu v pomere 66:33. 
+a 7 555 záznamov. Dáta si rozdelili na~testovaciu a~trénovaciu množinu v pomere 66:33. 
 Na trénovanie modelu bolo určených 66\% dát a~33\% dát sa použilo na~jeho testovanie. 
-V práci využívajú na~klasifikáciu metódu k~najbližších susedov (angl. K-Nearest Neighbors, skr. KNN), metódu podporných vektorov (angl. support vector machines, skr. SVM) a~Naivný Bayesovský klasifikátor (angl. Naive Bayes)  
-(pozri. Tab.~\ref{tab_vyber_funkci}). Na konci experimentu autori zhodnotili, 
+V práci využívajú na~klasifikáciu metódu k~najbližších susedov (angl. K-Nearest Neighbors, skr. KNN), metódu podporných vektorov (angl. support vector machines, skr. SVM) a~naivný bayesovský klasifikátor (angl. Naive Bayes)  
+(pozri Tab.~\ref{tab_vyber_funkci}). Na konci experimentu autori zhodnotili, 
 že využitie genetického algoritmu na~výber atribútov pri rôznych klasifikátoroch malo veľmi priaznivé
 účinky práve na~SVM, a~to v zlepšení až o 14,55\% v prvom datasete a~11,77\% v druhom datasete.
 Keďže zlepšenie bolo výrazné pri každom zo spomenutých klasifikátorov, autori v práci usúdili, že
@@ -136,12 +136,13 @@ Giot et al. 2009     & 88,86 ± 0,23           & 90,05 ± 0,41            & 77,4
 V práci \cite{ref_babatunde} autori využili na~výber atribútov tri rôzne algoritmy, a~to 
 genetický algoritmus, Waikato pre analýzu znalostí - výber prvkov založený na~korelácii (angl. Waikato Environment for Knowledge Analysis - Correlation-based Feature Selection, skr. WEKA-CFS) a~Waikato pre analýzu znalostí - výber prvkov založený na~hodnotení (angl. Waikato Environment for Knowledge Analysis - ranker, skr. WEKA-ranker). Na vyhodnotenie taktiež použili viacero klasifikátorov
 a to viac vrstvový perceptron (angl. Multi-Layer Perceptron, skr. MLP ), náhodný les (angl. Random Forest, skr. RF), J48, Naive Bayes a~regresiu. Najlepšie výsledky 
-boli získané pomocou MLP. Ako najlepšia funkcia na~výber atribútov sa ukázal práve genetický algoritmus,
+boli získané pomocou MLP. Ako najlepší spôsob na~výber atribútov sa ukázal práve genetický algoritmus,
 ktorý má výhodu v širokej možnosti nastavovania.
 
 Práca \cite{ref_zhao} využila genetický algoritmus na~optimalizáciu nielen výberu atribútov, 
 ale aj výberu parametrov pre SVM klasifikátor. Využitie tohto algoritmu, nielen zlepšilo výsledky klasifikácie, 
-ale oproti  grid searchu aj zrýchlilo výpočet o 2,62 sekundy.
+ale oproti  
+mriežkovému vyhľadávaniu parametrov (angl. grid search) aj zrýchlilo výpočet o 2,62 sekundy.
 Presnosť klasifikácie sa zvýšila až o 3,57\%. Najnižšie 
 získané hodnoty 83,14 ± 7,19 boli s využitím výberu atribútov založenom na~genetickom algoritme.
 
@@ -154,13 +155,13 @@ Naive Bayes, tak jeho klasifikácia sa zlepšila o 4,92 \%.
 
 Nami vytvorený genetický algoritmus chceme porovnať s existujúcimi algoritmami na~výber 
 atribútov, a~to faktor inflácie (angl. Variance Inflation Factor, skr. VIF) a~výber atribútov na~základe korelácií (skr. CORR).  
-Na fitness funkciu chceme využiť len jeden algoritmus, a~to K-Nearest Neighbors (KNN), ako bude spomenuté v nasledujúcej kapitole.
+Na fitness funkciu chceme využiť len jeden algoritmus, a~to KNN, ako bude spomenuté v nasledujúcej kapitole.
 
 
 %opis použitého algoritmu - aj s odôvodnením výberu algoritmu
 \section{Využívané algoritmy na~výber atribútov}
 V tejto práci sme sa rozhodli porovnať genetický algoritmus na~výber atribútov s
-algoritmami Variance Inflation Factor (VIF) a~výberom na~základe korelácií (CORR). Tieto 
+algoritmami VIF a~výberom atributov na~základe korelácií. Tieto 
 algoritmy sa radia medzi základné algoritmy na~výber atribútov \cite{ref_xu}.
 \subsection{Variance Inflation Factor}
 Tento algoritmus odstraňuje atribúty, ktoré majú veľmi silnú kolinearitu.
@@ -180,7 +181,7 @@ korelácie. Najčastejšie je využívaný Pearsonov korelačný koeficient. Ten
 \begin{math}1\end{math} až \begin{math}-1\end{math}. \begin{math}1\end{math} vo výsledku predstavuje perfektnú pozitívnu 
 koreláciu (podobnosť). Naopak \begin{math}-1\end{math} predstavuje 
 perfektńu negatívnu koreláciu (podobnosť). \begin{math}0\end{math} označuje, že medzi prvkami nie je žiadna korelácia / podobnosť.
-Cieľom tohto algoritmu je odstránenie takmer totožných stĺpcov.\cite{ref_xu}
+Cieľom tohto algoritmu je odstránenie takmer totožných stĺpcov \cite{ref_xu}.
 
 \subsection{Genetický algoritmus}
 
@@ -188,7 +189,7 @@ Genetické algoritmy sú inšpirované evolúciou. Ich základ sa teda skladá z
 určité množstvo chromozómov, ktoré sa spolu volajú populácia. Tieto chromozómy obsahujú kritické informácie 
 potrebné na~vyriešenie problému. Tieto algoritmy sa využívajú najmä na~optimalizáciu rôznych
 problémov. Ich uplatnenie je v praxi veľmi široké \cite{ref_babatunde,ref_whitley}. Nami vytvorený algoritmus začína 
-inicializáciou populácie genetického algoritmu (Obr.~\ref{fig_ga_rozdelenie}).
+inicializáciou populácie genetického algoritmu (pozri Obr.~\ref{fig_ga_rozdelenie}).
 \begin{figure}
 \includegraphics[width=\textwidth]{image/GA_alg.png}
 \caption{Schéma genetického algoritmu na~výber atribútov.} \label{fig_ga_rozdelenie}
@@ -196,7 +197,7 @@ inicializáciou populácie genetického algoritmu (Obr.~\ref{fig_ga_rozdelenie})
     
 \subsubsection{Inicializácia populácie genetického algoritmu.}
 
-Pri inicializácií sa nastavia prvotné funkcie genetického algoritmu (Tab.~\ref{tab_nastavenie_gen_alg}). Nastavenie genetického algoritmu bolo na~základe testov a~opísaných prác ~\cite{ref_babatunde}.
+Pri inicializácií sa nastavia prvotné funkcie genetického algoritmu (pozri Tab.~\ref{tab_nastavenie_gen_alg}). Nastavenie genetického algoritmu bolo na~základe testov a~opísaných prác ~\cite{ref_babatunde}.
 V algoritme je chromozóm reprezentovaný \begin{math}n\end{math} génmi. Jeden gén prezentuje \begin{math}1\end{math} 
 alebo \begin{math}0\end{math}, ktorá hovorí, či sa vo výslednom vektore atribútov nachádza alebo nie. 
 Počet týchto génov \begin{math}n\end{math} je počtom atribútov, ktoré sú vo vstupnom vektore, a~teda 
@@ -230,18 +231,18 @@ na výber jedincov (chromozómov) do ďalšej generácie.
 \subsubsection{Výber silných jedincov.}
 
 Tento spôsob sa nazýva elitárstvo, teda koľko najlepších chromozómov z~predchádzajúcej generácie prejde
-do novej generácie. Výhodou je najmä to, že silné jedince sa naďalej reprodukujú a~predávajú svoje vlastnosti
+do novej generácie. Výhodou je hlavne to, že silné jedince sa naďalej reprodukujú a~predávajú svoje vlastnosti
 novovytvoreným chromozómom.
 
 \subsubsection{Kríženie jedincov.}
 
-Pri krížení sa spájajú vlastnosti dvoch jedincov do jedného (Obr.~\ref{fig_ga_krizenie}).
+Pri krížení sa spájajú vlastnosti dvoch jedincov do jedného (pozri Obr.~\ref{fig_ga_krizenie}).
 Do kríženia vstupujú dva chromozómy, ktoré majú zrkadlové postavenie v zoradenom liste podľa fitness funkcie. 
 Jeden chromozóm je teda z~časti, kde je fitness funkcia najsilnejšia a~jeden z~časti, kde je fitness funkcia naopak slabšia. 
 Tento spôsob by mal pomôcť algoritmu, aby nezastal na~lokálnom maxime. Následne sa prechádza po génoch 
 jednotlivých chromozómov a~podľa percentuálnej náhody sa vyberie jeden z~génov do budúceho jedinca.
 Šanca, s akou sa jednotlivé gény volia, ako aj počet takto vytvorených jedincov sa v genetickom algoritme
-nastavuje pomocou parametrov (Tab.~\ref{tab_nastavenie_gen_alg}). 
+nastavuje pomocou parametrov (pozri Tab.~\ref{tab_nastavenie_gen_alg}). 
 
 \begin{figure}
 \includegraphics[width=\textwidth]{image/krizenie.png}
@@ -250,7 +251,7 @@ nastavuje pomocou parametrov (Tab.~\ref{tab_nastavenie_gen_alg}).
 
 Zvyšné chromozómy sa náhodne vygenerujú ako pri inicializácií, aby počet chromozómov v každej generácií bol rovnaký. 
 Ako posledné prejde algoritmus k~mutácii. Tá prejde všetky chromozómy v zadanej populácií a~následne aj jednotlivé gény.
-Nad každým génom sa vygeneruje náhodné číslo, na~základe ktorého sa s 60\% šancou gén zmení na~opačný (Obr.~\ref{fig_ga_mutovanie}). 
+Nad každým génom sa vygeneruje náhodné číslo, na~základe ktorého sa s 60\% šancou gén zmení na~opačný (pozri Obr.~\ref{fig_ga_mutovanie}). 
 
 \begin{figure}
 \includegraphics[width=\textwidth]{image/mutacia.png}
@@ -270,7 +271,7 @@ stavu používateľa, a~teda či používateľ leží, sedí, kráča, kráča h
 Dataset obsahuje informácie o 30 dobrovoľníkoch vo veku 19 až 48 rokov. Každý používateľ vykonal spomenutých
 6 aktivít, pri ktorých mal na~páse pripevnený smartfón Samsung Galaxy S II. Dataset obsahuje informácie z~
 gyroskopu a~akcelerometra. Z~nich sa zaznamenávalo 3-osové lineárne zrýchlenie a~3-osové uhlové rýchlosti 
-pri~konštantných 50 Hz. V datasete sa nachádza 3609 záznamov. Každý záznam v datasete obsahuje 561 atribútov, ktoré obsahujú:
+pri~konštantných 50 Hz. V datasete sa nachádza 3609 záznamov. Každý záznam v datasete obsahuje 561 atribútov, ktoré obsahujú~\cite{ref_dataset_anguita}:
 
 \begin{itemize}
 \item trojosové zrýchlenie z~akcelerometra a~odhadované zrýchlenie tela,
@@ -279,16 +280,15 @@ pri~konštantných 50 Hz. V datasete sa nachádza 3609 záznamov. Každý zázna
 \item označenie konkrétneho subjektu.
 \end{itemize}
 
-Nad týmto datasetom sa snažíme overiť a~porovnať silu genetického algoritmu oproti štandardným metódam. Porovnávame 
-jeho získané accurancy skóre so skóre, ktoré získa algoritmus VIF alebo analýza na~základe korelácií. V experimente boli využité modely
+Nad týmto datasetom sa snažíme overiť a~porovnať silu genetického algoritmu oproti štandardným metódam. V experimente boli využité modely
 adaptívne zvýšenie
-(angl. Adaptive Boosting, skr. AdaBoost), Rozhodovací strom (angl. Decision Tree), extrémne náhodné lesy (angl. Extra Trees), Naive Bayes, K-Nearest Neighbors, Lineárna diskriminačná analýza (angl. Linear Discriminant Analysis, skr. LDA), 
-Logistická regresia (angl. Logistic Regression), neurónové siete (angl. Artificial neural networks, skr. ANN), Random Forest, SVM Sigmoid, SVM RBF a Kvalitatívna analýza údajov (angl. Qualitative Data Analysis, skr. QDA).
+(angl. Adaptive Boosting, skr. AdaBoost), rozhodovací strom (angl. Decision Tree), extrémne náhodné lesy (angl. Extra Trees), Naive Bayes, K-Nearest Neighbors, lineárna diskriminačná analýza (angl. Linear Discriminant Analysis, skr. LDA), 
+logistická regresia (angl. Logistic Regression), neurónové siete (angl. Artificial neural networks, skr. ANN), Random Forest, SVM Sigmoid, SVM RBF a kvalitatívna analýza údajov (angl. Qualitative Data Analysis, skr. QDA).
 
 \subsection{Algoritmus na vyhodnocovanie.}
 
-Na vyhodnocovanie sme použili algoritmus skúmajúci presnosť (angl. Accuracy, skr. ACC).Presnosť je jedným z najbežnejšie používaných algoritmov na vyhodnocovanie klasifikácie a je definovaná ako pomer medzi správne klasifikovanými vzorkami k celkovému počtu vzoriek. 
-Vo vzorci (2) P a N označuje počet pozitívnych a negatívnych vzoriek. ~\cite{ref_sokolova}
+Na vyhodnocovanie sme použili metriku skúmajúcu presnosť (angl. Accuracy, skr. ACC).Presnosť je jednou z najbežnejšie používaných metrík na vyhodnocovanie klasifikácie a je definovaná ako pomer medzi správne klasifikovanými vzorkami k celkovému počtu vzoriek. 
+Vo vzorci (2) P a N označuje počet pozitívnych a negatívnych vzoriek~\cite{ref_sokolova}.
 
 \begin{equation}
 Acc = \frac{TP+TN}{TP+TN+FP+FN}
@@ -302,15 +302,15 @@ Hore spomenuté algoritmy strojového učenia, boli využité vďaka knižniciam
 \section{Vyhodnotenie}
 
 Výsledky experimentu sú zobrazené v tabuľke ~\ref{tab_nastavenie_vyhodnotenie_experimentu} 
-a tabuľke ~\ref{tab_pocet_vyber_atributov} . Využitie genetického algoritmu
+a tabuľke ~\ref{tab_pocet_vyber_atributov}. Využitie genetického algoritmu
 nám v tomto experimente ukázalo, že časovo najnáročnejší na~predspracovanie bol algoritmus 
-VIF. Oproti GA bol tento algoritmus až 13-krát pomalší (tabuľka~\ref{tab_cas_vyber_atributov}). Ak sa predpokladá zlepšenie GA zvýšením počtu generácií, vieme povedať, že výsledky GA je ešte možné zlepšiť 
+VIF. Oproti GA bol tento algoritmus až 13-krát pomalší (pozri Tab.~\ref{tab_cas_vyber_atributov}). Ak sa predpokladá zlepšenie GA zvýšením počtu generácií, vieme povedať, že výsledky GA je ešte možné zlepšiť 
 zvýšením jeho časového zaťaženia. 
 
 
 \begin{table}[]
     \centering
-    \caption{Výsledky genetického algoritmu. Jadro funkcie bolo KNN}\label{tab_nastavenie_vyhodnotenie_experimentu}
+    \caption{Výsledky genetického algoritmu. Jadro funkcie bolo KNN.}\label{tab_nastavenie_vyhodnotenie_experimentu}
     \begin{tabular}{|l|c|c|c|c|c|c|}   
     \hline
     \textbf{Model}               & \multicolumn{3}{c|}{\textbf{ACC}}                       & \textbf{ Najlepší  } \\ 
@@ -347,7 +347,7 @@ je potrebné znížiť časové zaťaženie na~predspracovanie, keďže VIF je 1
 
 \begin{table}[]
     \centering
-    \caption{Počet vybratých atribútov. Jadro fitness funkcie bolo KNN}\label{tab_pocet_vyber_atributov}
+    \caption{Počet vybratých atribútov. Jadro fitness funkcie bolo KNN.}\label{tab_pocet_vyber_atributov}
     \begin{tabular}{|l|c|c|c|c|}
     \hline
     \textbf{Algoritmus}                  & GA        & VIF         & CORR          & Bez funkcie výberu \\ \hline
@@ -357,11 +357,11 @@ je potrebné znížiť časové zaťaženie na~predspracovanie, keďže VIF je 1
 
 \begin{table}[]
     \centering
-    \caption{Čas trvania jednotlivých algoritmov na výber atribútov. Jadro fitness funkcie bolo KNN}\label{tab_cas_vyber_atributov}
+    \caption{Čas trvania jednotlivých algoritmov na výber atribútov. Jadro fitness funkcie bolo KNN.}\label{tab_cas_vyber_atributov}
     \begin{tabular}{|l|c|c|c|c|}
     \hline
-    \textbf{Algoritmus}                  & GA        & VIF         & CORR          & Bez funkcie výberu \\ \hline
-    \textbf{Počet atribútov}            & 5364,672s        & 71266,493s         & 2,403s          & 0,009s \\ \hline
+    \textbf{Algoritmus}                  & GA        & VIF         & CORR         \\ \hline
+    \textbf{Počet atribútov}            & 5364,672s        & 71266,493s         & 2,403s \\ \hline
     \end{tabular}
 \end{table}
 
